@@ -11,11 +11,8 @@ See [pidgin DBus howto](https://developer.pidgin.im/wiki/DbusHowto) for a refere
 
 Create status:
 ```js
-var dbus   = require('node-dbus');
-var pidgin = require('pidgin');
-var purple = pidgin.createClient(dbus.sessionBus());
-
-purple.PurpleSavedstatusNew('Вася Ложкин', 2, function (err, status) {
+var pidgin = require('pidgin').createClient();
+pidgin.PurpleSavedstatusNew('Вася Ложкин', 2, function (err, status) {
   console.log('Status created');
   console.log(status);
 });
@@ -23,9 +20,7 @@ purple.PurpleSavedstatusNew('Вася Ложкин', 2, function (err, status) {
 
 Handle message:
 ```js
-var dbus   = require('node-dbus');
-var pidgin = require('pidgin');
-var purple = pidgin.createClient(dbus.sessionBus());
-purple.on('ReceivedImMsg', function(msg) {
+var pidgin = require('pidgin').createClient();
+pidgin.on('ReceivedImMsg', function(msg) {
   console.log('Message!', msg)
 })

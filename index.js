@@ -19,7 +19,9 @@ module.exports['org.freedesktop.DBus.Introspectable'] = function(bus) {
 }
 
 module.exports.createClient = function(bus) {
-  return new module.exports['im.pidgin.purple.PurpleInterface'](bus, '/im/pidgin/purple/PurpleObject');  
+  if (!bus)
+    bus = require('dbus-native').sessionBus();
+  return new module.exports['im.pidgin.purple.PurpleInterface'](bus, '/im/pidgin/purple/PurpleObject');
 };
 
 module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
@@ -38,7 +40,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsFindAny',
-            body: [name, protocol], 
+            body: [name, protocol],
             signature: 'ss',
         }, callback);
     };
@@ -48,7 +50,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsFindConnected',
-            body: [name, protocol], 
+            body: [name, protocol],
             signature: 'ss',
         }, callback);
     };
@@ -58,7 +60,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeIsChat',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -68,7 +70,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeIsBuddy',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -78,7 +80,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeIsContact',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -88,7 +90,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeIsGroup',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -98,7 +100,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIsOnline',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -108,7 +110,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeHasFlag',
-            body: [node, flags], 
+            body: [node, flags],
             signature: 'ii',
         }, callback);
     };
@@ -118,7 +120,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeShouldSave',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -128,7 +130,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionIsConnected',
-            body: [connection], 
+            body: [connection],
             signature: 'i',
         }, callback);
     };
@@ -138,7 +140,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionIsValid',
-            body: [connection], 
+            body: [connection],
             signature: 'i',
         }, callback);
     };
@@ -148,7 +150,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvIm',
-            body: [conversation], 
+            body: [conversation],
             signature: 'i',
         }, callback);
     };
@@ -158,7 +160,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChat',
-            body: [conversation], 
+            body: [conversation],
             signature: 'i',
         }, callback);
     };
@@ -168,7 +170,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountNew',
-            body: [username, protocol_id], 
+            body: [username, protocol_id],
             signature: 'ss',
         }, callback);
     };
@@ -178,9 +180,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountDestroy',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountConnect = function(account, callback) {
@@ -189,9 +191,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountConnect',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRegister = function(account, callback) {
@@ -200,9 +202,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRegister',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountDisconnect = function(account, callback) {
@@ -211,9 +213,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountDisconnect',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountNotifyAdded = function(account, remote_user, id, alias, message, callback) {
@@ -222,9 +224,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountNotifyAdded',
-            body: [account, remote_user, id, alias, message], 
+            body: [account, remote_user, id, alias, message],
             signature: 'issss',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRequestAdd = function(account, remote_user, id, alias, message, callback) {
@@ -233,9 +235,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRequestAdd',
-            body: [account, remote_user, id, alias, message], 
+            body: [account, remote_user, id, alias, message],
             signature: 'issss',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRequestCloseWithAccount = function(account, callback) {
@@ -244,9 +246,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRequestCloseWithAccount',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRequestClose = function(ui_handle, callback) {
@@ -255,9 +257,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRequestClose',
-            body: [ui_handle], 
+            body: [ui_handle],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRequestChangePassword = function(account, callback) {
@@ -266,9 +268,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRequestChangePassword',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRequestChangeUserInfo = function(account, callback) {
@@ -277,9 +279,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRequestChangeUserInfo',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetUsername = function(account, username, callback) {
@@ -288,9 +290,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetUsername',
-            body: [account, username], 
+            body: [account, username],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetPassword = function(account, password, callback) {
@@ -299,9 +301,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetPassword',
-            body: [account, password], 
+            body: [account, password],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetAlias = function(account, alias, callback) {
@@ -310,9 +312,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetAlias',
-            body: [account, alias], 
+            body: [account, alias],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetUserInfo = function(account, user_info, callback) {
@@ -321,9 +323,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetUserInfo',
-            body: [account, user_info], 
+            body: [account, user_info],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetBuddyIconPath = function(account, path, callback) {
@@ -332,9 +334,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetBuddyIconPath',
-            body: [account, path], 
+            body: [account, path],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetProtocolId = function(account, protocol_id, callback) {
@@ -343,9 +345,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetProtocolId',
-            body: [account, protocol_id], 
+            body: [account, protocol_id],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetConnection = function(account, gc, callback) {
@@ -354,9 +356,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetConnection',
-            body: [account, gc], 
+            body: [account, gc],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetRememberPassword = function(account, value, callback) {
@@ -365,9 +367,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetRememberPassword',
-            body: [account, value], 
+            body: [account, value],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetCheckMail = function(account, value, callback) {
@@ -376,9 +378,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetCheckMail',
-            body: [account, value], 
+            body: [account, value],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetEnabled = function(account, ui, value, callback) {
@@ -387,9 +389,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetEnabled',
-            body: [account, ui, value], 
+            body: [account, ui, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetProxyInfo = function(account, info, callback) {
@@ -398,9 +400,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetProxyInfo',
-            body: [account, info], 
+            body: [account, info],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetPrivacyType = function(account, privacy_type, callback) {
@@ -409,9 +411,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetPrivacyType',
-            body: [account, privacy_type], 
+            body: [account, privacy_type],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetStatusTypes = function(account, status_types, callback) {
@@ -420,9 +422,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetStatusTypes',
-            body: [account, status_types], 
+            body: [account, status_types],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetStatusList = function(account, status_id, active, attrs, callback) {
@@ -431,9 +433,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetStatusList',
-            body: [account, status_id, active, attrs], 
+            body: [account, status_id, active, attrs],
             signature: 'isii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountGetSilenceSuppression = function(account, callback) {
@@ -442,7 +444,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetSilenceSuppression',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -452,9 +454,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetSilenceSuppression',
-            body: [account, value], 
+            body: [account, value],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountClearSettings = function(account, callback) {
@@ -463,9 +465,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountClearSettings',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRemoveSetting = function(account, setting, callback) {
@@ -474,9 +476,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRemoveSetting',
-            body: [account, setting], 
+            body: [account, setting],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetInt = function(account, name, value, callback) {
@@ -485,9 +487,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetInt',
-            body: [account, name, value], 
+            body: [account, name, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetString = function(account, name, value, callback) {
@@ -496,9 +498,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetString',
-            body: [account, name, value], 
+            body: [account, name, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetBool = function(account, name, value, callback) {
@@ -507,9 +509,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetBool',
-            body: [account, name, value], 
+            body: [account, name, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetUiInt = function(account, ui, name, value, callback) {
@@ -518,9 +520,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetUiInt',
-            body: [account, ui, name, value], 
+            body: [account, ui, name, value],
             signature: 'issi',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetUiString = function(account, ui, name, value, callback) {
@@ -529,9 +531,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetUiString',
-            body: [account, ui, name, value], 
+            body: [account, ui, name, value],
             signature: 'isss',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSetUiBool = function(account, ui, name, value, callback) {
@@ -540,9 +542,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSetUiBool',
-            body: [account, ui, name, value], 
+            body: [account, ui, name, value],
             signature: 'issi',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountIsConnected = function(account, callback) {
@@ -551,7 +553,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountIsConnected',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -561,7 +563,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountIsConnecting',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -571,7 +573,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountIsDisconnected',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -581,7 +583,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetUsername',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -591,7 +593,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetPassword',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -601,7 +603,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetAlias',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -611,7 +613,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetUserInfo',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -621,7 +623,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetBuddyIconPath',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -631,7 +633,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetProtocolId',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -641,7 +643,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetProtocolName',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -651,7 +653,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetConnection',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -661,7 +663,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetNameForDisplay',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -671,7 +673,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetRememberPassword',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -681,7 +683,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetCheckMail',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -691,7 +693,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetEnabled',
-            body: [account, ui], 
+            body: [account, ui],
             signature: 'is',
         }, callback);
     };
@@ -701,7 +703,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetProxyInfo',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -711,7 +713,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetPrivacyType',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -721,7 +723,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetActiveStatus',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -731,7 +733,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetStatus',
-            body: [account, status_id], 
+            body: [account, status_id],
             signature: 'is',
         }, callback);
     };
@@ -741,7 +743,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetStatusType',
-            body: [account, id], 
+            body: [account, id],
             signature: 'is',
         }, callback);
     };
@@ -751,7 +753,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetStatusTypeWithPrimitive',
-            body: [account, primitive], 
+            body: [account, primitive],
             signature: 'ii',
         }, callback);
     };
@@ -761,7 +763,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetPresence',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -771,7 +773,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountIsStatusActive',
-            body: [account, status_id], 
+            body: [account, status_id],
             signature: 'is',
         }, callback);
     };
@@ -781,7 +783,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetStatusTypes',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -791,7 +793,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetInt',
-            body: [account, name, default_value], 
+            body: [account, name, default_value],
             signature: 'isi',
         }, callback);
     };
@@ -801,7 +803,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetString',
-            body: [account, name, default_value], 
+            body: [account, name, default_value],
             signature: 'iss',
         }, callback);
     };
@@ -811,7 +813,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetBool',
-            body: [account, name, default_value], 
+            body: [account, name, default_value],
             signature: 'isi',
         }, callback);
     };
@@ -821,7 +823,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetUiInt',
-            body: [account, ui, name, default_value], 
+            body: [account, ui, name, default_value],
             signature: 'issi',
         }, callback);
     };
@@ -831,7 +833,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetUiString',
-            body: [account, ui, name, default_value], 
+            body: [account, ui, name, default_value],
             signature: 'isss',
         }, callback);
     };
@@ -841,7 +843,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetUiBool',
-            body: [account, ui, name, default_value], 
+            body: [account, ui, name, default_value],
             signature: 'issi',
         }, callback);
     };
@@ -851,7 +853,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetLog',
-            body: [account, create], 
+            body: [account, create],
             signature: 'ii',
         }, callback);
     };
@@ -861,9 +863,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountDestroyLog',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountAddBuddy = function(account, buddy, callback) {
@@ -872,9 +874,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountAddBuddy',
-            body: [account, buddy], 
+            body: [account, buddy],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountAddBuddyWithInvite = function(account, buddy, message, callback) {
@@ -883,9 +885,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountAddBuddyWithInvite',
-            body: [account, buddy, message], 
+            body: [account, buddy, message],
             signature: 'iis',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountAddBuddies = function(account, buddies, callback) {
@@ -894,9 +896,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountAddBuddies',
-            body: [account, buddies], 
+            body: [account, buddies],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountAddBuddiesWithInvite = function(account, buddies, message, callback) {
@@ -905,9 +907,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountAddBuddiesWithInvite',
-            body: [account, buddies, message], 
+            body: [account, buddies, message],
             signature: 'iis',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRemoveBuddy = function(account, buddy, group, callback) {
@@ -916,9 +918,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRemoveBuddy',
-            body: [account, buddy, group], 
+            body: [account, buddy, group],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRemoveBuddies = function(account, buddies, groups, callback) {
@@ -927,9 +929,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRemoveBuddies',
-            body: [account, buddies, groups], 
+            body: [account, buddies, groups],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountRemoveGroup = function(account, group, callback) {
@@ -938,9 +940,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountRemoveGroup',
-            body: [account, group], 
+            body: [account, group],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountChangePassword = function(account, orig_pw, new_pw, callback) {
@@ -949,9 +951,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountChangePassword',
-            body: [account, orig_pw, new_pw], 
+            body: [account, orig_pw, new_pw],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountSupportsOfflineMessage = function(account, buddy, callback) {
@@ -960,7 +962,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountSupportsOfflineMessage',
-            body: [account, buddy], 
+            body: [account, buddy],
             signature: 'ii',
         }, callback);
     };
@@ -970,7 +972,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountGetCurrentError',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -980,9 +982,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountClearCurrentError',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsAdd = function(account, callback) {
@@ -991,9 +993,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsAdd',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsRemove = function(account, callback) {
@@ -1002,9 +1004,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsRemove',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsDelete = function(account, callback) {
@@ -1013,9 +1015,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsDelete',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsReorder = function(account, new_index, callback) {
@@ -1024,9 +1026,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsReorder',
-            body: [account, new_index], 
+            body: [account, new_index],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsGetAll = function(callback) {
@@ -1051,7 +1053,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsFind',
-            body: [name, protocol], 
+            body: [name, protocol],
             signature: 'ss',
         }, callback);
     };
@@ -1061,7 +1063,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsRestoreCurrentStatuses',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsSetUiOps = function(ops, callback) {
@@ -1070,9 +1072,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsGetUiOps = function(callback) {
@@ -1089,7 +1091,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleAccountsUninit = function(callback) {
@@ -1098,7 +1100,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAccountsUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNew = function(callback) {
@@ -1115,9 +1117,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSetBlist',
-            body: [blist], 
+            body: [blist],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleGetBlist = function(callback) {
@@ -1150,7 +1152,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeNext',
-            body: [node, offline], 
+            body: [node, offline],
             signature: 'ii',
         }, callback);
     };
@@ -1160,7 +1162,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetParent',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -1170,7 +1172,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetFirstChild',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -1180,7 +1182,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetSiblingNext',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -1190,7 +1192,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetSiblingPrev',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -1200,7 +1202,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistShow',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistDestroy = function(callback) {
@@ -1209,7 +1211,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistDestroy',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistSetVisible = function(show, callback) {
@@ -1218,9 +1220,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistSetVisible',
-            body: [show], 
+            body: [show],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistUpdateBuddyStatus = function(buddy, old_status, callback) {
@@ -1229,9 +1231,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistUpdateBuddyStatus',
-            body: [buddy, old_status], 
+            body: [buddy, old_status],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistUpdateNodeIcon = function(node, callback) {
@@ -1240,9 +1242,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistUpdateNodeIcon',
-            body: [node], 
+            body: [node],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistUpdateBuddyIcon = function(buddy, callback) {
@@ -1251,9 +1253,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistUpdateBuddyIcon',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRenameBuddy = function(buddy, name, callback) {
@@ -1262,9 +1264,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRenameBuddy',
-            body: [buddy, name], 
+            body: [buddy, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistAliasContact = function(contact, alias, callback) {
@@ -1273,9 +1275,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAliasContact',
-            body: [contact, alias], 
+            body: [contact, alias],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistAliasBuddy = function(buddy, alias, callback) {
@@ -1284,9 +1286,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAliasBuddy',
-            body: [buddy, alias], 
+            body: [buddy, alias],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistServerAliasBuddy = function(buddy, alias, callback) {
@@ -1295,9 +1297,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistServerAliasBuddy',
-            body: [buddy, alias], 
+            body: [buddy, alias],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistAliasChat = function(chat, alias, callback) {
@@ -1306,9 +1308,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAliasChat',
-            body: [chat, alias], 
+            body: [chat, alias],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRenameGroup = function(group, name, callback) {
@@ -1317,9 +1319,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRenameGroup',
-            body: [group, name], 
+            body: [group, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleChatNew = function(account, alias, components, callback) {
@@ -1328,7 +1330,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleChatNew',
-            body: [account, alias, components], 
+            body: [account, alias, components],
             signature: 'isa{ss}',
         }, callback);
     };
@@ -1338,9 +1340,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleChatDestroy',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistAddChat = function(chat, group, node, callback) {
@@ -1349,9 +1351,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAddChat',
-            body: [chat, group, node], 
+            body: [chat, group, node],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyNew = function(account, name, alias, callback) {
@@ -1360,7 +1362,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyNew',
-            body: [account, name, alias], 
+            body: [account, name, alias],
             signature: 'iss',
         }, callback);
     };
@@ -1370,9 +1372,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyDestroy',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddySetIcon = function(buddy, icon, callback) {
@@ -1381,9 +1383,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddySetIcon',
-            body: [buddy, icon], 
+            body: [buddy, icon],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyGetAccount = function(buddy, callback) {
@@ -1392,7 +1394,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetAccount',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1402,7 +1404,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetName',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1412,7 +1414,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetIcon',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1422,7 +1424,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetContact',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1432,7 +1434,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetPresence',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1442,7 +1444,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetMediaCaps',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1452,9 +1454,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddySetMediaCaps',
-            body: [buddy, media_caps], 
+            body: [buddy, media_caps],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistAddBuddy = function(buddy, contact, group, node, callback) {
@@ -1463,9 +1465,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAddBuddy',
-            body: [buddy, contact, group, node], 
+            body: [buddy, contact, group, node],
             signature: 'iiii',
-            // 
+            //
         }, callback);
     };
     this.PurpleGroupNew = function(name, callback) {
@@ -1474,7 +1476,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGroupNew',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -1484,9 +1486,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGroupDestroy',
-            body: [group], 
+            body: [group],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistAddGroup = function(group, node, callback) {
@@ -1495,9 +1497,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAddGroup',
-            body: [group, node], 
+            body: [group, node],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleContactNew = function(callback) {
@@ -1514,9 +1516,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactDestroy',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleContactGetGroup = function(contact, callback) {
@@ -1525,7 +1527,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactGetGroup',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
         }, callback);
     };
@@ -1535,9 +1537,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAddContact',
-            body: [contact, group, node], 
+            body: [contact, group, node],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistMergeContact = function(source, node, callback) {
@@ -1546,9 +1548,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistMergeContact',
-            body: [source, node], 
+            body: [source, node],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleContactGetPriorityBuddy = function(contact, callback) {
@@ -1557,7 +1559,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactGetPriorityBuddy',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
         }, callback);
     };
@@ -1567,9 +1569,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactSetAlias',
-            body: [contact, alias], 
+            body: [contact, alias],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleContactGetAlias = function(contact, callback) {
@@ -1578,7 +1580,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactGetAlias',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
         }, callback);
     };
@@ -1588,7 +1590,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactOnAccount',
-            body: [contact, account], 
+            body: [contact, account],
             signature: 'ii',
         }, callback);
     };
@@ -1598,9 +1600,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleContactInvalidatePriorityBuddy',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRemoveBuddy = function(buddy, callback) {
@@ -1609,9 +1611,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRemoveBuddy',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRemoveContact = function(contact, callback) {
@@ -1620,9 +1622,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRemoveContact',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRemoveChat = function(chat, callback) {
@@ -1631,9 +1633,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRemoveChat',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRemoveGroup = function(group, callback) {
@@ -1642,9 +1644,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRemoveGroup',
-            body: [group], 
+            body: [group],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyGetAliasOnly = function(buddy, callback) {
@@ -1653,7 +1655,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetAliasOnly',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1663,7 +1665,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetServerAlias',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1673,7 +1675,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetContactAlias',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1683,7 +1685,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetLocalAlias',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1693,7 +1695,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetAlias',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1703,7 +1705,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetLocalBuddyAlias',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1713,7 +1715,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleChatGetName',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -1723,7 +1725,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindBuddy',
-            body: [account, name], 
+            body: [account, name],
             signature: 'is',
         }, callback);
     };
@@ -1733,7 +1735,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindBuddyInGroup',
-            body: [account, name, group], 
+            body: [account, name, group],
             signature: 'isi',
         }, callback);
     };
@@ -1743,7 +1745,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindBuddies',
-            body: [account, name], 
+            body: [account, name],
             signature: 'is',
         }, callback);
     };
@@ -1753,7 +1755,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindGroup',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -1763,7 +1765,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistFindChat',
-            body: [account, name], 
+            body: [account, name],
             signature: 'is',
         }, callback);
     };
@@ -1773,7 +1775,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleChatGetGroup',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -1783,7 +1785,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleChatGetAccount',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -1793,7 +1795,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyGetGroup',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -1803,7 +1805,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGroupGetAccounts',
-            body: [g], 
+            body: [g],
             signature: 'i',
         }, callback);
     };
@@ -1813,7 +1815,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGroupOnAccount',
-            body: [g, account], 
+            body: [g, account],
             signature: 'ii',
         }, callback);
     };
@@ -1823,7 +1825,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGroupGetName',
-            body: [group], 
+            body: [group],
             signature: 'i',
         }, callback);
     };
@@ -1833,9 +1835,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistAddAccount',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRemoveAccount = function(account, callback) {
@@ -1844,9 +1846,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRemoveAccount',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistGetGroupSize = function(group, offline, callback) {
@@ -1855,7 +1857,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistGetGroupSize',
-            body: [group, offline], 
+            body: [group, offline],
             signature: 'ii',
         }, callback);
     };
@@ -1865,7 +1867,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistGetGroupOnlineCount',
-            body: [group], 
+            body: [group],
             signature: 'i',
         }, callback);
     };
@@ -1875,7 +1877,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistLoad',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistScheduleSave = function(callback) {
@@ -1884,7 +1886,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistScheduleSave',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRequestAddBuddy = function(account, username, group, alias, callback) {
@@ -1893,9 +1895,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRequestAddBuddy',
-            body: [account, username, group, alias], 
+            body: [account, username, group, alias],
             signature: 'isss',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRequestAddChat = function(account, group, alias, name, callback) {
@@ -1904,9 +1906,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRequestAddChat',
-            body: [account, group, alias, name], 
+            body: [account, group, alias, name],
             signature: 'iiss',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistRequestAddGroup = function(callback) {
@@ -1915,7 +1917,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistRequestAddGroup',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNodeSetBool = function(node, key, value, callback) {
@@ -1924,9 +1926,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeSetBool',
-            body: [node, key, value], 
+            body: [node, key, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNodeGetBool = function(node, key, callback) {
@@ -1935,7 +1937,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetBool',
-            body: [node, key], 
+            body: [node, key],
             signature: 'is',
         }, callback);
     };
@@ -1945,9 +1947,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeSetInt',
-            body: [node, key, value], 
+            body: [node, key, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNodeGetInt = function(node, key, callback) {
@@ -1956,7 +1958,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetInt',
-            body: [node, key], 
+            body: [node, key],
             signature: 'is',
         }, callback);
     };
@@ -1966,9 +1968,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeSetString',
-            body: [node, key, value], 
+            body: [node, key, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNodeGetString = function(node, key, callback) {
@@ -1977,7 +1979,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetString',
-            body: [node, key], 
+            body: [node, key],
             signature: 'is',
         }, callback);
     };
@@ -1987,9 +1989,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeRemoveSetting',
-            body: [node, key], 
+            body: [node, key],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNodeSetFlags = function(node, flags, callback) {
@@ -1998,9 +2000,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeSetFlags',
-            body: [node, flags], 
+            body: [node, flags],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistNodeGetFlags = function(node, callback) {
@@ -2009,7 +2011,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetFlags',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -2019,7 +2021,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetType',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -2029,7 +2031,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistNodeGetExtendedMenu',
-            body: [n], 
+            body: [n],
             signature: 'i',
         }, callback);
     };
@@ -2039,9 +2041,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistGetUiOps = function(callback) {
@@ -2058,7 +2060,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleBlistUninit = function(callback) {
@@ -2067,7 +2069,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBlistUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconNew = function(account, username, icon_data, icon_len, checksum, callback) {
@@ -2076,7 +2078,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconNew',
-            body: [account, username, icon_data, icon_len, checksum], 
+            body: [account, username, icon_data, icon_len, checksum],
             signature: 'isiis',
         }, callback);
     };
@@ -2086,7 +2088,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconRef',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2096,7 +2098,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconUnref',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2106,9 +2108,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconUpdate',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconSetData = function(icon, data, len, checksum, callback) {
@@ -2117,9 +2119,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconSetData',
-            body: [icon, data, len, checksum], 
+            body: [icon, data, len, checksum],
             signature: 'iiis',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconGetAccount = function(icon, callback) {
@@ -2128,7 +2130,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetAccount',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2138,7 +2140,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetUsername',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2148,7 +2150,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetChecksum',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2158,7 +2160,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetData',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2168,7 +2170,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetExtension',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2178,7 +2180,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetFullPath',
-            body: [icon], 
+            body: [icon],
             signature: 'i',
         }, callback);
     };
@@ -2188,9 +2190,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsSetForUser',
-            body: [account, username, icon_data, icon_len, checksum], 
+            body: [account, username, icon_data, icon_len, checksum],
             signature: 'isiis',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconsFind = function(account, username, callback) {
@@ -2199,7 +2201,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsFind',
-            body: [account, username], 
+            body: [account, username],
             signature: 'is',
         }, callback);
     };
@@ -2209,7 +2211,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsFindAccountIcon',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -2219,7 +2221,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsSetAccountIcon',
-            body: [account, icon_data, icon_len], 
+            body: [account, icon_data, icon_len],
             signature: 'iii',
         }, callback);
     };
@@ -2229,7 +2231,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsGetAccountIconTimestamp',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -2239,7 +2241,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsNodeHasCustomIcon',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -2249,7 +2251,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsNodeFindCustomIcon',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -2259,7 +2261,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsNodeSetCustomIcon',
-            body: [node, icon_data, icon_len], 
+            body: [node, icon_data, icon_len],
             signature: 'iii',
         }, callback);
     };
@@ -2269,7 +2271,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsNodeSetCustomIconFromFile',
-            body: [node, filename], 
+            body: [node, filename],
             signature: 'is',
         }, callback);
     };
@@ -2279,7 +2281,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsHasCustomIcon',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
         }, callback);
     };
@@ -2289,7 +2291,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsFindCustomIcon',
-            body: [contact], 
+            body: [contact],
             signature: 'i',
         }, callback);
     };
@@ -2299,7 +2301,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsSetCustomIcon',
-            body: [contact, icon_data, icon_len], 
+            body: [contact, icon_data, icon_len],
             signature: 'iii',
         }, callback);
     };
@@ -2309,9 +2311,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsSetCaching',
-            body: [caching], 
+            body: [caching],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconsIsCaching = function(callback) {
@@ -2328,9 +2330,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsSetCacheDir',
-            body: [cache_dir], 
+            body: [cache_dir],
             signature: 's',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconsGetCacheDir = function(callback) {
@@ -2347,7 +2349,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconsUninit = function(callback) {
@@ -2356,7 +2358,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconsUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuddyIconGetScaleSize = function(spec, width, height, callback) {
@@ -2365,9 +2367,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuddyIconGetScaleSize',
-            body: [spec, width, height], 
+            body: [spec, width, height],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionNew = function(account, regist, password, callback) {
@@ -2376,9 +2378,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionNew',
-            body: [account, regist, password], 
+            body: [account, regist, password],
             signature: 'iis',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionDestroy = function(gc, callback) {
@@ -2387,9 +2389,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionDestroy',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionSetState = function(gc, state, callback) {
@@ -2398,9 +2400,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionSetState',
-            body: [gc, state], 
+            body: [gc, state],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionSetAccount = function(gc, account, callback) {
@@ -2409,9 +2411,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionSetAccount',
-            body: [gc, account], 
+            body: [gc, account],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionSetDisplayName = function(gc, name, callback) {
@@ -2420,9 +2422,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionSetDisplayName',
-            body: [gc, name], 
+            body: [gc, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionSetProtocolData = function(connection, proto_data, callback) {
@@ -2431,9 +2433,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionSetProtocolData',
-            body: [connection, proto_data], 
+            body: [connection, proto_data],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionGetState = function(gc, callback) {
@@ -2442,7 +2444,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionGetState',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
         }, callback);
     };
@@ -2452,7 +2454,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionGetAccount',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
         }, callback);
     };
@@ -2462,7 +2464,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionGetPrpl',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
         }, callback);
     };
@@ -2472,7 +2474,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionGetPassword',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
         }, callback);
     };
@@ -2482,7 +2484,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionGetDisplayName',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
         }, callback);
     };
@@ -2492,9 +2494,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionUpdateProgress',
-            body: [gc, text, step, count], 
+            body: [gc, text, step, count],
             signature: 'isii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionNotice = function(gc, text, callback) {
@@ -2503,9 +2505,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionNotice',
-            body: [gc, text], 
+            body: [gc, text],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionError = function(gc, reason, callback) {
@@ -2514,9 +2516,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionError',
-            body: [gc, reason], 
+            body: [gc, reason],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionErrorReason = function(gc, reason, description, callback) {
@@ -2525,9 +2527,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionErrorReason',
-            body: [gc, reason, description], 
+            body: [gc, reason, description],
             signature: 'iis',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionSslError = function(gc, ssl_error, callback) {
@@ -2536,9 +2538,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionSslError',
-            body: [gc, ssl_error], 
+            body: [gc, ssl_error],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionErrorIsFatal = function(reason, callback) {
@@ -2547,7 +2549,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionErrorIsFatal',
-            body: [reason], 
+            body: [reason],
             signature: 'i',
         }, callback);
     };
@@ -2557,7 +2559,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionsDisconnectAll',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionsGetAll = function(callback) {
@@ -2582,9 +2584,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionsSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionsGetUiOps = function(callback) {
@@ -2601,7 +2603,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionsInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleConnectionsUninit = function(callback) {
@@ -2610,7 +2612,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConnectionsUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationNew = function(type, account, name, callback) {
@@ -2619,7 +2621,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationNew',
-            body: [type, account, name], 
+            body: [type, account, name],
             signature: 'iis',
         }, callback);
     };
@@ -2629,9 +2631,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationDestroy',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationPresent = function(conv, callback) {
@@ -2640,9 +2642,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationPresent',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetType = function(conv, callback) {
@@ -2651,7 +2653,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetType',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2661,9 +2663,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationSetUiOps',
-            body: [conv, ops], 
+            body: [conv, ops],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationsSetUiOps = function(ops, callback) {
@@ -2672,9 +2674,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationsSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetUiOps = function(conv, callback) {
@@ -2683,7 +2685,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetUiOps',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2693,9 +2695,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationSetAccount',
-            body: [conv, account], 
+            body: [conv, account],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetAccount = function(conv, callback) {
@@ -2704,7 +2706,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetAccount',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2714,7 +2716,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetGc',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2724,9 +2726,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationSetTitle',
-            body: [conv, title], 
+            body: [conv, title],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetTitle = function(conv, callback) {
@@ -2735,7 +2737,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetTitle',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2745,9 +2747,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationAutosetTitle',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationSetName = function(conv, name, callback) {
@@ -2756,9 +2758,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationSetName',
-            body: [conv, name], 
+            body: [conv, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetName = function(conv, callback) {
@@ -2767,7 +2769,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetName',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2777,7 +2779,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbGetAttribute',
-            body: [cb, key], 
+            body: [cb, key],
             signature: 'is',
         }, callback);
     };
@@ -2787,7 +2789,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbGetAttributeKeys',
-            body: [cb], 
+            body: [cb],
             signature: 'i',
         }, callback);
     };
@@ -2797,9 +2799,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbSetAttribute',
-            body: [chat, cb, key, value], 
+            body: [chat, cb, key, value],
             signature: 'iiss',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatCbSetAttributes = function(chat, cb, keys, values, callback) {
@@ -2808,9 +2810,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbSetAttributes',
-            body: [chat, cb, keys, values], 
+            body: [chat, cb, keys, values],
             signature: 'iiii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationSetLogging = function(conv, log, callback) {
@@ -2819,9 +2821,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationSetLogging',
-            body: [conv, log], 
+            body: [conv, log],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationIsLogging = function(conv, callback) {
@@ -2830,7 +2832,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationIsLogging',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2840,7 +2842,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetImData',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2850,7 +2852,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetChatData',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2884,7 +2886,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindConversationWithAccount',
-            body: [type, name, account], 
+            body: [type, name, account],
             signature: 'isi',
         }, callback);
     };
@@ -2894,9 +2896,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationWrite',
-            body: [conv, who, message, flags, mtime], 
+            body: [conv, who, message, flags, mtime],
             signature: 'issii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationSetFeatures = function(conv, features, callback) {
@@ -2905,9 +2907,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationSetFeatures',
-            body: [conv, features], 
+            body: [conv, features],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetFeatures = function(conv, callback) {
@@ -2916,7 +2918,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetFeatures',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2926,7 +2928,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationHasFocus',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2936,9 +2938,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationUpdate',
-            body: [conv, type], 
+            body: [conv, type],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetMessageHistory = function(conv, callback) {
@@ -2947,7 +2949,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetMessageHistory',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -2957,9 +2959,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationClearMessageHistory',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationMessageGetSender = function(msg, callback) {
@@ -2968,7 +2970,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationMessageGetSender',
-            body: [msg], 
+            body: [msg],
             signature: 'i',
         }, callback);
     };
@@ -2978,7 +2980,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationMessageGetMessage',
-            body: [msg], 
+            body: [msg],
             signature: 'i',
         }, callback);
     };
@@ -2988,7 +2990,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationMessageGetFlags',
-            body: [msg], 
+            body: [msg],
             signature: 'i',
         }, callback);
     };
@@ -2998,7 +3000,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationMessageGetTimestamp',
-            body: [msg], 
+            body: [msg],
             signature: 'i',
         }, callback);
     };
@@ -3008,7 +3010,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImGetConversation',
-            body: [im], 
+            body: [im],
             signature: 'i',
         }, callback);
     };
@@ -3018,9 +3020,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImSetIcon',
-            body: [im, icon], 
+            body: [im, icon],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImGetIcon = function(im, callback) {
@@ -3029,7 +3031,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImGetIcon',
-            body: [im], 
+            body: [im],
             signature: 'i',
         }, callback);
     };
@@ -3039,9 +3041,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImSetTypingState',
-            body: [im, state], 
+            body: [im, state],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImGetTypingState = function(im, callback) {
@@ -3050,7 +3052,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImGetTypingState',
-            body: [im], 
+            body: [im],
             signature: 'i',
         }, callback);
     };
@@ -3060,9 +3062,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImStartTypingTimeout',
-            body: [im, timeout], 
+            body: [im, timeout],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImStopTypingTimeout = function(im, callback) {
@@ -3071,9 +3073,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImStopTypingTimeout',
-            body: [im], 
+            body: [im],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImGetTypingTimeout = function(im, callback) {
@@ -3082,7 +3084,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImGetTypingTimeout',
-            body: [im], 
+            body: [im],
             signature: 'i',
         }, callback);
     };
@@ -3092,9 +3094,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImSetTypeAgain',
-            body: [im, val], 
+            body: [im, val],
             signature: 'iu',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImGetTypeAgain = function(im, callback) {
@@ -3103,7 +3105,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImGetTypeAgain',
-            body: [im], 
+            body: [im],
             signature: 'i',
         }, callback);
     };
@@ -3113,9 +3115,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImStartSendTypedTimeout',
-            body: [im], 
+            body: [im],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImStopSendTypedTimeout = function(im, callback) {
@@ -3124,9 +3126,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImStopSendTypedTimeout',
-            body: [im], 
+            body: [im],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImGetSendTypedTimeout = function(im, callback) {
@@ -3135,7 +3137,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImGetSendTypedTimeout',
-            body: [im], 
+            body: [im],
             signature: 'i',
         }, callback);
     };
@@ -3145,9 +3147,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImUpdateTyping',
-            body: [im], 
+            body: [im],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImWrite = function(im, who, message, flags, mtime, callback) {
@@ -3156,9 +3158,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImWrite',
-            body: [im, who, message, flags, mtime], 
+            body: [im, who, message, flags, mtime],
             signature: 'issii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvPresentError = function(who, account, what, callback) {
@@ -3167,7 +3169,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvPresentError',
-            body: [who, account, what], 
+            body: [who, account, what],
             signature: 'sis',
         }, callback);
     };
@@ -3177,9 +3179,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImSend',
-            body: [im, message], 
+            body: [im, message],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvSendConfirm = function(conv, message, callback) {
@@ -3188,9 +3190,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvSendConfirm',
-            body: [conv, message], 
+            body: [conv, message],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvImSendWithFlags = function(im, message, flags, callback) {
@@ -3199,9 +3201,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvImSendWithFlags',
-            body: [im, message, flags], 
+            body: [im, message, flags],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvCustomSmileyAdd = function(conv, smile, cksum_type, chksum, remote, callback) {
@@ -3210,7 +3212,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvCustomSmileyAdd',
-            body: [conv, smile, cksum_type, chksum, remote], 
+            body: [conv, smile, cksum_type, chksum, remote],
             signature: 'isssi',
         }, callback);
     };
@@ -3220,9 +3222,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvCustomSmileyClose',
-            body: [conv, smile], 
+            body: [conv, smile],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatGetConversation = function(chat, callback) {
@@ -3231,7 +3233,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetConversation',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3241,7 +3243,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSetUsers',
-            body: [chat, users], 
+            body: [chat, users],
             signature: 'ii',
         }, callback);
     };
@@ -3251,7 +3253,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetUsers',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3261,9 +3263,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatIgnore',
-            body: [chat, name], 
+            body: [chat, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatUnignore = function(chat, name, callback) {
@@ -3272,9 +3274,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatUnignore',
-            body: [chat, name], 
+            body: [chat, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatSetIgnored = function(chat, ignored, callback) {
@@ -3283,7 +3285,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSetIgnored',
-            body: [chat, ignored], 
+            body: [chat, ignored],
             signature: 'ii',
         }, callback);
     };
@@ -3293,7 +3295,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetIgnored',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3303,7 +3305,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetIgnoredUser',
-            body: [chat, user], 
+            body: [chat, user],
             signature: 'is',
         }, callback);
     };
@@ -3313,7 +3315,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatIsUserIgnored',
-            body: [chat, user], 
+            body: [chat, user],
             signature: 'is',
         }, callback);
     };
@@ -3323,9 +3325,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSetTopic',
-            body: [chat, who, topic], 
+            body: [chat, who, topic],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatGetTopic = function(chat, callback) {
@@ -3334,7 +3336,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetTopic',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3344,9 +3346,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSetId',
-            body: [chat, id], 
+            body: [chat, id],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatGetId = function(chat, callback) {
@@ -3355,7 +3357,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetId',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3365,9 +3367,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatWrite',
-            body: [chat, who, message, flags, mtime], 
+            body: [chat, who, message, flags, mtime],
             signature: 'issii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatSend = function(chat, message, callback) {
@@ -3376,9 +3378,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSend',
-            body: [chat, message], 
+            body: [chat, message],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatSendWithFlags = function(chat, message, flags, callback) {
@@ -3387,9 +3389,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSendWithFlags',
-            body: [chat, message, flags], 
+            body: [chat, message, flags],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatAddUser = function(chat, user, extra_msg, flags, new_arrival, callback) {
@@ -3398,9 +3400,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatAddUser',
-            body: [chat, user, extra_msg, flags, new_arrival], 
+            body: [chat, user, extra_msg, flags, new_arrival],
             signature: 'issii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatAddUsers = function(chat, users, extra_msgs, flags, new_arrivals, callback) {
@@ -3409,9 +3411,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatAddUsers',
-            body: [chat, users, extra_msgs, flags, new_arrivals], 
+            body: [chat, users, extra_msgs, flags, new_arrivals],
             signature: 'iiiii',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatRenameUser = function(chat, old_user, new_user, callback) {
@@ -3420,9 +3422,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatRenameUser',
-            body: [chat, old_user, new_user], 
+            body: [chat, old_user, new_user],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatRemoveUser = function(chat, user, reason, callback) {
@@ -3431,9 +3433,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatRemoveUser',
-            body: [chat, user, reason], 
+            body: [chat, user, reason],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatRemoveUsers = function(chat, users, reason, callback) {
@@ -3442,9 +3444,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatRemoveUsers',
-            body: [chat, users, reason], 
+            body: [chat, users, reason],
             signature: 'iis',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatFindUser = function(chat, user, callback) {
@@ -3453,7 +3455,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatFindUser',
-            body: [chat, user], 
+            body: [chat, user],
             signature: 'is',
         }, callback);
     };
@@ -3463,9 +3465,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatUserSetFlags',
-            body: [chat, user, flags], 
+            body: [chat, user, flags],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatUserGetFlags = function(chat, user, callback) {
@@ -3474,7 +3476,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatUserGetFlags',
-            body: [chat, user], 
+            body: [chat, user],
             signature: 'is',
         }, callback);
     };
@@ -3484,9 +3486,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatClearUsers',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatSetNick = function(chat, nick, callback) {
@@ -3495,9 +3497,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatSetNick',
-            body: [chat, nick], 
+            body: [chat, nick],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatGetNick = function(chat, callback) {
@@ -3506,7 +3508,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatGetNick',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3516,7 +3518,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindChat',
-            body: [gc, id], 
+            body: [gc, id],
             signature: 'ii',
         }, callback);
     };
@@ -3526,9 +3528,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatLeft',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatInviteUser = function(chat, user, message, confirm, callback) {
@@ -3537,9 +3539,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatInviteUser',
-            body: [chat, user, message, confirm], 
+            body: [chat, user, message, confirm],
             signature: 'issi',
-            // 
+            //
         }, callback);
     };
     this.PurpleConvChatHasLeft = function(chat, callback) {
@@ -3548,7 +3550,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatHasLeft',
-            body: [chat], 
+            body: [chat],
             signature: 'i',
         }, callback);
     };
@@ -3558,7 +3560,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbNew',
-            body: [name, alias, flags], 
+            body: [name, alias, flags],
             signature: 'ssi',
         }, callback);
     };
@@ -3568,7 +3570,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbFind',
-            body: [chat, name], 
+            body: [chat, name],
             signature: 'is',
         }, callback);
     };
@@ -3578,7 +3580,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbGetName',
-            body: [cb], 
+            body: [cb],
             signature: 'i',
         }, callback);
     };
@@ -3588,9 +3590,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConvChatCbDestroy',
-            body: [cb], 
+            body: [cb],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationGetExtendedMenu = function(conv, callback) {
@@ -3599,7 +3601,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationGetExtendedMenu',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -3609,7 +3611,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationsInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleConversationsUninit = function(callback) {
@@ -3618,7 +3620,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleConversationsUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleCoreInit = function(ui, callback) {
@@ -3627,7 +3629,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleCoreInit',
-            body: [ui], 
+            body: [ui],
             signature: 's',
         }, callback);
     };
@@ -3637,7 +3639,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleCoreQuit',
-            // 
+            //
         }, callback);
     };
     this.PurpleCoreGetVersion = function(callback) {
@@ -3670,9 +3672,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleCoreSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleCoreGetUiOps = function(callback) {
@@ -3705,7 +3707,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferNew',
-            body: [account, type, who], 
+            body: [account, type, who],
             signature: 'iis',
         }, callback);
     };
@@ -3723,9 +3725,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferRef',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferUnref = function(xfer, callback) {
@@ -3734,9 +3736,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferUnref',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferRequest = function(xfer, callback) {
@@ -3745,9 +3747,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferRequest',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferRequestAccepted = function(xfer, filename, callback) {
@@ -3756,9 +3758,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferRequestAccepted',
-            body: [xfer, filename], 
+            body: [xfer, filename],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferRequestDenied = function(xfer, callback) {
@@ -3767,9 +3769,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferRequestDenied',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferGetType = function(xfer, callback) {
@@ -3778,7 +3780,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetType',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3788,7 +3790,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetAccount',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3798,7 +3800,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetRemoteUser',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3808,7 +3810,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetStatus',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3818,7 +3820,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferIsCanceled',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3828,7 +3830,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferIsCompleted',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3838,7 +3840,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetFilename',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3848,7 +3850,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetLocalFilename',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3858,7 +3860,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetBytesSent',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3868,7 +3870,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetBytesRemaining',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3878,7 +3880,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetSize',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3888,7 +3890,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetLocalPort',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3898,7 +3900,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetRemoteIp',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3908,7 +3910,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetRemotePort',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3918,7 +3920,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetStartTime',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3928,7 +3930,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetEndTime',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -3938,9 +3940,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferSetCompleted',
-            body: [xfer, completed], 
+            body: [xfer, completed],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferSetMessage = function(xfer, message, callback) {
@@ -3949,9 +3951,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferSetMessage',
-            body: [xfer, message], 
+            body: [xfer, message],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferSetFilename = function(xfer, filename, callback) {
@@ -3960,9 +3962,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferSetFilename',
-            body: [xfer, filename], 
+            body: [xfer, filename],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferSetLocalFilename = function(xfer, filename, callback) {
@@ -3971,9 +3973,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferSetLocalFilename',
-            body: [xfer, filename], 
+            body: [xfer, filename],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferSetSize = function(xfer, size, callback) {
@@ -3982,9 +3984,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferSetSize',
-            body: [xfer, size], 
+            body: [xfer, size],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferSetBytesSent = function(xfer, bytes_sent, callback) {
@@ -3993,9 +3995,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferSetBytesSent',
-            body: [xfer, bytes_sent], 
+            body: [xfer, bytes_sent],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferGetUiOps = function(xfer, callback) {
@@ -4004,7 +4006,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetUiOps',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -4014,9 +4016,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferStart',
-            body: [xfer, fd, ip, port], 
+            body: [xfer, fd, ip, port],
             signature: 'iisu',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferEnd = function(xfer, callback) {
@@ -4025,9 +4027,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferEnd',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferAdd = function(xfer, callback) {
@@ -4036,9 +4038,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferAdd',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferCancelLocal = function(xfer, callback) {
@@ -4047,9 +4049,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferCancelLocal',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferCancelRemote = function(xfer, callback) {
@@ -4058,9 +4060,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferCancelRemote',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferError = function(type, account, who, msg, callback) {
@@ -4069,9 +4071,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferError',
-            body: [type, account, who, msg], 
+            body: [type, account, who, msg],
             signature: 'iiss',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferUpdateProgress = function(xfer, callback) {
@@ -4080,9 +4082,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferUpdateProgress',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXferGetThumbnail = function(xfer, callback) {
@@ -4091,7 +4093,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetThumbnail',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -4101,7 +4103,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferGetThumbnailMimetype',
-            body: [xfer], 
+            body: [xfer],
             signature: 'i',
         }, callback);
     };
@@ -4111,9 +4113,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXferPrepareThumbnail',
-            body: [xfer, formats], 
+            body: [xfer, formats],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleXfersInit = function(callback) {
@@ -4122,7 +4124,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXfersInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleXfersUninit = function(callback) {
@@ -4131,7 +4133,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXfersUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleXfersSetUiOps = function(ops, callback) {
@@ -4140,9 +4142,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleXfersSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleXfersGetUiOps = function(callback) {
@@ -4159,9 +4161,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogFree',
-            body: [log], 
+            body: [log],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogWrite = function(log, type, from, time, message, callback) {
@@ -4170,9 +4172,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogWrite',
-            body: [log, type, from, time, message], 
+            body: [log, type, from, time, message],
             signature: 'iisis',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogGetLogs = function(type, name, account, callback) {
@@ -4181,7 +4183,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogGetLogs',
-            body: [type, name, account], 
+            body: [type, name, account],
             signature: 'isi',
         }, callback);
     };
@@ -4191,7 +4193,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogGetSystemLogs',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -4201,7 +4203,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogGetSize',
-            body: [log], 
+            body: [log],
             signature: 'i',
         }, callback);
     };
@@ -4211,7 +4213,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogGetTotalSize',
-            body: [type, name, account], 
+            body: [type, name, account],
             signature: 'isi',
         }, callback);
     };
@@ -4221,7 +4223,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogGetActivityScore',
-            body: [type, name, account], 
+            body: [type, name, account],
             signature: 'isi',
         }, callback);
     };
@@ -4231,7 +4233,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogIsDeletable',
-            body: [log], 
+            body: [log],
             signature: 'i',
         }, callback);
     };
@@ -4241,7 +4243,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogDelete',
-            body: [log], 
+            body: [log],
             signature: 'i',
         }, callback);
     };
@@ -4251,7 +4253,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogGetLogDir',
-            body: [type, name, account], 
+            body: [type, name, account],
             signature: 'isi',
         }, callback);
     };
@@ -4261,9 +4263,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogSetFree',
-            body: [set], 
+            body: [set],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogCommonWriter = function(log, ext, callback) {
@@ -4272,9 +4274,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogCommonWriter',
-            body: [log, ext], 
+            body: [log, ext],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogCommonLister = function(type, name, account, ext, logger, callback) {
@@ -4283,7 +4285,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogCommonLister',
-            body: [type, name, account, ext, logger], 
+            body: [type, name, account, ext, logger],
             signature: 'isisi',
         }, callback);
     };
@@ -4293,7 +4295,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogCommonTotalSizer',
-            body: [type, name, account, ext], 
+            body: [type, name, account, ext],
             signature: 'isis',
         }, callback);
     };
@@ -4303,7 +4305,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogCommonSizer',
-            body: [log], 
+            body: [log],
             signature: 'i',
         }, callback);
     };
@@ -4313,7 +4315,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogCommonDeleter',
-            body: [log], 
+            body: [log],
             signature: 'i',
         }, callback);
     };
@@ -4323,7 +4325,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogCommonIsDeletable',
-            body: [log], 
+            body: [log],
             signature: 'i',
         }, callback);
     };
@@ -4333,9 +4335,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogLoggerFree',
-            body: [logger], 
+            body: [logger],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogLoggerAdd = function(logger, callback) {
@@ -4344,9 +4346,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogLoggerAdd',
-            body: [logger], 
+            body: [logger],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogLoggerRemove = function(logger, callback) {
@@ -4355,9 +4357,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogLoggerRemove',
-            body: [logger], 
+            body: [logger],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogLoggerSet = function(logger, callback) {
@@ -4366,9 +4368,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogLoggerSet',
-            body: [logger], 
+            body: [logger],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogLoggerGet = function(callback) {
@@ -4393,7 +4395,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleLogUninit = function(callback) {
@@ -4402,7 +4404,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleLogUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifySearchresultsFree = function(results, callback) {
@@ -4411,9 +4413,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsFree',
-            body: [results], 
+            body: [results],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifySearchresultsNewRows = function(gc, results, data, callback) {
@@ -4422,9 +4424,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsNewRows',
-            body: [gc, results, data], 
+            body: [gc, results, data],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifySearchresultsNew = function(callback) {
@@ -4441,7 +4443,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsColumnNew',
-            body: [title], 
+            body: [title],
             signature: 's',
         }, callback);
     };
@@ -4451,9 +4453,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsColumnAdd',
-            body: [results, column], 
+            body: [results, column],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifySearchresultsRowAdd = function(results, row, callback) {
@@ -4462,9 +4464,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsRowAdd',
-            body: [results, row], 
+            body: [results, row],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifySearchresultsGetRowsCount = function(results, callback) {
@@ -4473,7 +4475,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsGetRowsCount',
-            body: [results], 
+            body: [results],
             signature: 'i',
         }, callback);
     };
@@ -4483,7 +4485,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsGetColumnsCount',
-            body: [results], 
+            body: [results],
             signature: 'i',
         }, callback);
     };
@@ -4493,7 +4495,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsRowGet',
-            body: [results, row_id], 
+            body: [results, row_id],
             signature: 'iu',
         }, callback);
     };
@@ -4503,7 +4505,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySearchresultsColumnGetTitle',
-            body: [results, column_id], 
+            body: [results, column_id],
             signature: 'iu',
         }, callback);
     };
@@ -4521,9 +4523,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoDestroy',
-            body: [user_info], 
+            body: [user_info],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoGetEntries = function(user_info, callback) {
@@ -4532,7 +4534,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoGetEntries',
-            body: [user_info], 
+            body: [user_info],
             signature: 'i',
         }, callback);
     };
@@ -4542,7 +4544,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoGetTextWithNewline',
-            body: [user_info, newline], 
+            body: [user_info, newline],
             signature: 'is',
         }, callback);
     };
@@ -4552,9 +4554,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoAddPair',
-            body: [user_info, label, value], 
+            body: [user_info, label, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoAddPairPlaintext = function(user_info, label, value, callback) {
@@ -4563,9 +4565,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoAddPairPlaintext',
-            body: [user_info, label, value], 
+            body: [user_info, label, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoPrependPair = function(user_info, label, value, callback) {
@@ -4574,9 +4576,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoPrependPair',
-            body: [user_info, label, value], 
+            body: [user_info, label, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoRemoveEntry = function(user_info, user_info_entry, callback) {
@@ -4585,9 +4587,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoRemoveEntry',
-            body: [user_info, user_info_entry], 
+            body: [user_info, user_info_entry],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoEntryNew = function(label, value, callback) {
@@ -4596,7 +4598,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntryNew',
-            body: [label, value], 
+            body: [label, value],
             signature: 'ss',
         }, callback);
     };
@@ -4606,9 +4608,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoAddSectionBreak',
-            body: [user_info], 
+            body: [user_info],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoPrependSectionBreak = function(user_info, callback) {
@@ -4617,9 +4619,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoPrependSectionBreak',
-            body: [user_info], 
+            body: [user_info],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoAddSectionHeader = function(user_info, label, callback) {
@@ -4628,9 +4630,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoAddSectionHeader',
-            body: [user_info, label], 
+            body: [user_info, label],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoPrependSectionHeader = function(user_info, label, callback) {
@@ -4639,9 +4641,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoPrependSectionHeader',
-            body: [user_info, label], 
+            body: [user_info, label],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoRemoveLastItem = function(user_info, callback) {
@@ -4650,9 +4652,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoRemoveLastItem',
-            body: [user_info], 
+            body: [user_info],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoEntryGetLabel = function(user_info_entry, callback) {
@@ -4661,7 +4663,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntryGetLabel',
-            body: [user_info_entry], 
+            body: [user_info_entry],
             signature: 'i',
         }, callback);
     };
@@ -4671,9 +4673,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntrySetLabel',
-            body: [user_info_entry, label], 
+            body: [user_info_entry, label],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoEntryGetValue = function(user_info_entry, callback) {
@@ -4682,7 +4684,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntryGetValue',
-            body: [user_info_entry], 
+            body: [user_info_entry],
             signature: 'i',
         }, callback);
     };
@@ -4692,9 +4694,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntrySetValue',
-            body: [user_info_entry, value], 
+            body: [user_info_entry, value],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUserInfoEntryGetType = function(user_info_entry, callback) {
@@ -4703,7 +4705,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntryGetType',
-            body: [user_info_entry], 
+            body: [user_info_entry],
             signature: 'i',
         }, callback);
     };
@@ -4713,9 +4715,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUserInfoEntrySetType',
-            body: [user_info_entry, type], 
+            body: [user_info_entry, type],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyClose = function(type, ui_handle, callback) {
@@ -4724,9 +4726,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyClose',
-            body: [type, ui_handle], 
+            body: [type, ui_handle],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyCloseWithHandle = function(handle, callback) {
@@ -4735,9 +4737,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyCloseWithHandle',
-            body: [handle], 
+            body: [handle],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifySetUiOps = function(ops, callback) {
@@ -4746,9 +4748,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifySetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyGetUiOps = function(callback) {
@@ -4765,7 +4767,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleNotifyUninit = function(callback) {
@@ -4774,7 +4776,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNotifyUninit',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsInit = function(callback) {
@@ -4783,7 +4785,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsInit',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsUninit = function(callback) {
@@ -4792,7 +4794,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsUninit',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddNone = function(name, callback) {
@@ -4801,9 +4803,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddNone',
-            body: [name], 
+            body: [name],
             signature: 's',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddBool = function(name, value, callback) {
@@ -4812,9 +4814,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddBool',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddInt = function(name, value, callback) {
@@ -4823,9 +4825,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddInt',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddString = function(name, value, callback) {
@@ -4834,9 +4836,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddString',
-            body: [name, value], 
+            body: [name, value],
             signature: 'ss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddStringList = function(name, value, callback) {
@@ -4845,9 +4847,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddStringList',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddPath = function(name, value, callback) {
@@ -4856,9 +4858,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddPath',
-            body: [name, value], 
+            body: [name, value],
             signature: 'ss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsAddPathList = function(name, value, callback) {
@@ -4867,9 +4869,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsAddPathList',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsRemove = function(name, callback) {
@@ -4878,9 +4880,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsRemove',
-            body: [name], 
+            body: [name],
             signature: 's',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsRename = function(oldname, newname, callback) {
@@ -4889,9 +4891,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsRename',
-            body: [oldname, newname], 
+            body: [oldname, newname],
             signature: 'ss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsRenameBooleanToggle = function(oldname, newname, callback) {
@@ -4900,9 +4902,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsRenameBooleanToggle',
-            body: [oldname, newname], 
+            body: [oldname, newname],
             signature: 'ss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsDestroy = function(callback) {
@@ -4911,7 +4913,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsDestroy',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsSetBool = function(name, value, callback) {
@@ -4920,9 +4922,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsSetBool',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsSetInt = function(name, value, callback) {
@@ -4931,9 +4933,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsSetInt',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsSetString = function(name, value, callback) {
@@ -4942,9 +4944,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsSetString',
-            body: [name, value], 
+            body: [name, value],
             signature: 'ss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsSetStringList = function(name, value, callback) {
@@ -4953,9 +4955,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsSetStringList',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsSetPath = function(name, value, callback) {
@@ -4964,9 +4966,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsSetPath',
-            body: [name, value], 
+            body: [name, value],
             signature: 'ss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsSetPathList = function(name, value, callback) {
@@ -4975,9 +4977,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsSetPathList',
-            body: [name, value], 
+            body: [name, value],
             signature: 'si',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsExists = function(name, callback) {
@@ -4986,7 +4988,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsExists',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -4996,7 +4998,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetType',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5006,7 +5008,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetBool',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5016,7 +5018,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetInt',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5026,7 +5028,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetString',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5036,7 +5038,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetStringList',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5046,7 +5048,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetPath',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5056,7 +5058,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetPathList',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5066,7 +5068,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsGetChildrenNames',
-            body: [name], 
+            body: [name],
             signature: 's',
         }, callback);
     };
@@ -5076,9 +5078,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsDisconnectCallback',
-            body: [callback_id], 
+            body: [callback_id],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsDisconnectByHandle = function(handle, callback) {
@@ -5087,9 +5089,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsDisconnectByHandle',
-            body: [handle], 
+            body: [handle],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsTriggerCallback = function(name, callback) {
@@ -5098,9 +5100,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsTriggerCallback',
-            body: [name], 
+            body: [name],
             signature: 's',
-            // 
+            //
         }, callback);
     };
     this.PurplePrefsLoad = function(callback) {
@@ -5117,7 +5119,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrefsUpdateOld',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistShowWithAccount = function(account, callback) {
@@ -5126,9 +5128,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistShowWithAccount',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistNew = function(account, callback) {
@@ -5137,7 +5139,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistNew',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -5147,9 +5149,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRef',
-            body: [list], 
+            body: [list],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistUnref = function(list, callback) {
@@ -5158,9 +5160,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistUnref',
-            body: [list], 
+            body: [list],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistSetFields = function(list, fields, callback) {
@@ -5169,9 +5171,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistSetFields',
-            body: [list, fields], 
+            body: [list, fields],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistSetInProgress = function(list, in_progress, callback) {
@@ -5180,9 +5182,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistSetInProgress',
-            body: [list, in_progress], 
+            body: [list, in_progress],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistGetInProgress = function(list, callback) {
@@ -5191,7 +5193,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistGetInProgress',
-            body: [list], 
+            body: [list],
             signature: 'i',
         }, callback);
     };
@@ -5201,9 +5203,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomAdd',
-            body: [list, room], 
+            body: [list, room],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistGetList = function(gc, callback) {
@@ -5212,7 +5214,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistGetList',
-            body: [gc], 
+            body: [gc],
             signature: 'i',
         }, callback);
     };
@@ -5222,9 +5224,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistCancelGetList',
-            body: [list], 
+            body: [list],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistExpandCategory = function(list, category, callback) {
@@ -5233,9 +5235,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistExpandCategory',
-            body: [list, category], 
+            body: [list, category],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistGetFields = function(roomlist, callback) {
@@ -5244,7 +5246,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistGetFields',
-            body: [roomlist], 
+            body: [roomlist],
             signature: 'i',
         }, callback);
     };
@@ -5254,7 +5256,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomNew',
-            body: [type, name, parent], 
+            body: [type, name, parent],
             signature: 'isi',
         }, callback);
     };
@@ -5264,9 +5266,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomJoin',
-            body: [list, room], 
+            body: [list, room],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistRoomGetType = function(room, callback) {
@@ -5275,7 +5277,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomGetType',
-            body: [room], 
+            body: [room],
             signature: 'i',
         }, callback);
     };
@@ -5285,7 +5287,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomGetName',
-            body: [room], 
+            body: [room],
             signature: 'i',
         }, callback);
     };
@@ -5295,7 +5297,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomGetParent',
-            body: [room], 
+            body: [room],
             signature: 'i',
         }, callback);
     };
@@ -5305,7 +5307,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistRoomGetFields',
-            body: [room], 
+            body: [room],
             signature: 'i',
         }, callback);
     };
@@ -5315,7 +5317,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistFieldNew',
-            body: [type, label, name, hidden], 
+            body: [type, label, name, hidden],
             signature: 'issi',
         }, callback);
     };
@@ -5325,7 +5327,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistFieldGetType',
-            body: [field], 
+            body: [field],
             signature: 'i',
         }, callback);
     };
@@ -5335,7 +5337,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistFieldGetLabel',
-            body: [field], 
+            body: [field],
             signature: 'i',
         }, callback);
     };
@@ -5345,7 +5347,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistFieldGetHidden',
-            body: [field], 
+            body: [field],
             signature: 'i',
         }, callback);
     };
@@ -5355,9 +5357,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRoomlistSetUiOps',
-            body: [ops], 
+            body: [ops],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleRoomlistGetUiOps = function(callback) {
@@ -5374,7 +5376,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusNew',
-            body: [title, type], 
+            body: [title, type],
             signature: 'si',
         }, callback);
     };
@@ -5384,9 +5386,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSetTitle',
-            body: [status, title], 
+            body: [status, title],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusSetType = function(status, type, callback) {
@@ -5395,9 +5397,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSetType',
-            body: [status, type], 
+            body: [status, type],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusSetMessage = function(status, message, callback) {
@@ -5406,9 +5408,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSetMessage',
-            body: [status, message], 
+            body: [status, message],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusSetSubstatus = function(status, account, type, message, callback) {
@@ -5417,9 +5419,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSetSubstatus',
-            body: [status, account, type, message], 
+            body: [status, account, type, message],
             signature: 'iiis',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusUnsetSubstatus = function(saved_status, account, callback) {
@@ -5428,9 +5430,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusUnsetSubstatus',
-            body: [saved_status, account], 
+            body: [saved_status, account],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusDelete = function(title, callback) {
@@ -5439,7 +5441,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusDelete',
-            body: [title], 
+            body: [title],
             signature: 's',
         }, callback);
     };
@@ -5449,9 +5451,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusDeleteByStatus',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusesGetAll = function(callback) {
@@ -5468,7 +5470,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusesGetPopular',
-            body: [how_many], 
+            body: [how_many],
             signature: 'u',
         }, callback);
     };
@@ -5510,9 +5512,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSetIdleaway',
-            body: [idleaway], 
+            body: [idleaway],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusGetStartup = function(callback) {
@@ -5529,7 +5531,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusFind',
-            body: [title], 
+            body: [title],
             signature: 's',
         }, callback);
     };
@@ -5539,7 +5541,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusFindByCreationTime',
-            body: [creation_time], 
+            body: [creation_time],
             signature: 'i',
         }, callback);
     };
@@ -5549,7 +5551,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusFindTransientByTypeAndMessage',
-            body: [type, message], 
+            body: [type, message],
             signature: 'is',
         }, callback);
     };
@@ -5559,7 +5561,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusIsTransient',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
         }, callback);
     };
@@ -5569,7 +5571,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusGetTitle',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
         }, callback);
     };
@@ -5579,7 +5581,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusGetType',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
         }, callback);
     };
@@ -5589,7 +5591,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusGetMessage',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
         }, callback);
     };
@@ -5599,7 +5601,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusGetCreationTime',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
         }, callback);
     };
@@ -5609,7 +5611,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusHasSubstatuses',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
         }, callback);
     };
@@ -5619,7 +5621,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusGetSubstatus',
-            body: [saved_status, account], 
+            body: [saved_status, account],
             signature: 'ii',
         }, callback);
     };
@@ -5629,7 +5631,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSubstatusGetType',
-            body: [substatus], 
+            body: [substatus],
             signature: 'i',
         }, callback);
     };
@@ -5639,7 +5641,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusSubstatusGetMessage',
-            body: [substatus], 
+            body: [substatus],
             signature: 'i',
         }, callback);
     };
@@ -5649,9 +5651,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusActivate',
-            body: [saved_status], 
+            body: [saved_status],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusActivateForAccount = function(saved_status, account, callback) {
@@ -5660,9 +5662,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusActivateForAccount',
-            body: [saved_status, account], 
+            body: [saved_status, account],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusesInit = function(callback) {
@@ -5671,7 +5673,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusesInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleSavedstatusesUninit = function(callback) {
@@ -5680,7 +5682,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSavedstatusesUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleSmileyNew = function(img, shortcut, callback) {
@@ -5689,7 +5691,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyNew',
-            body: [img, shortcut], 
+            body: [img, shortcut],
             signature: 'is',
         }, callback);
     };
@@ -5699,7 +5701,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyNewFromFile',
-            body: [shortcut, filepath], 
+            body: [shortcut, filepath],
             signature: 'ss',
         }, callback);
     };
@@ -5709,9 +5711,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyDelete',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleSmileySetShortcut = function(smiley, shortcut, callback) {
@@ -5720,7 +5722,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileySetShortcut',
-            body: [smiley, shortcut], 
+            body: [smiley, shortcut],
             signature: 'is',
         }, callback);
     };
@@ -5730,9 +5732,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileySetData',
-            body: [smiley, smiley_data, smiley_data_len], 
+            body: [smiley, smiley_data, smiley_data_len],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleSmileyGetShortcut = function(smiley, callback) {
@@ -5741,7 +5743,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyGetShortcut',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
         }, callback);
     };
@@ -5751,7 +5753,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyGetChecksum',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
         }, callback);
     };
@@ -5761,7 +5763,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyGetStoredImage',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
         }, callback);
     };
@@ -5771,7 +5773,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyGetData',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
         }, callback);
     };
@@ -5781,7 +5783,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyGetExtension',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
         }, callback);
     };
@@ -5791,7 +5793,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileyGetFullPath',
-            body: [smiley], 
+            body: [smiley],
             signature: 'i',
         }, callback);
     };
@@ -5809,7 +5811,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileysFindByShortcut',
-            body: [shortcut], 
+            body: [shortcut],
             signature: 's',
         }, callback);
     };
@@ -5819,7 +5821,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileysFindByChecksum',
-            body: [checksum], 
+            body: [checksum],
             signature: 's',
         }, callback);
     };
@@ -5837,7 +5839,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileysInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleSmileysUninit = function(callback) {
@@ -5846,7 +5848,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSmileysUninit',
-            // 
+            //
         }, callback);
     };
     this.PurplePrimitiveGetIdFromType = function(type, callback) {
@@ -5855,7 +5857,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrimitiveGetIdFromType',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -5865,7 +5867,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrimitiveGetNameFromType',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -5875,7 +5877,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrimitiveGetTypeFromId',
-            body: [id], 
+            body: [id],
             signature: 's',
         }, callback);
     };
@@ -5885,7 +5887,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeNewFull',
-            body: [primitive, id, name, saveable, user_settable, independent], 
+            body: [primitive, id, name, saveable, user_settable, independent],
             signature: 'issiii',
         }, callback);
     };
@@ -5895,7 +5897,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeNew',
-            body: [primitive, id, name, user_settable], 
+            body: [primitive, id, name, user_settable],
             signature: 'issi',
         }, callback);
     };
@@ -5905,9 +5907,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeDestroy',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusTypeSetPrimaryAttr = function(status_type, attr_id, callback) {
@@ -5916,9 +5918,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeSetPrimaryAttr',
-            body: [status_type, attr_id], 
+            body: [status_type, attr_id],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusTypeAddAttr = function(status_type, id, name, value, callback) {
@@ -5927,9 +5929,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeAddAttr',
-            body: [status_type, id, name, value], 
+            body: [status_type, id, name, value],
             signature: 'issi',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusTypeGetPrimitive = function(status_type, callback) {
@@ -5938,7 +5940,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeGetPrimitive',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -5948,7 +5950,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeGetId',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -5958,7 +5960,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeGetName',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -5968,7 +5970,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeIsSaveable',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -5978,7 +5980,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeIsUserSettable',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -5988,7 +5990,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeIsIndependent',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -5998,7 +6000,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeIsExclusive',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -6008,7 +6010,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeIsAvailable',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -6018,7 +6020,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeGetPrimaryAttr',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -6028,7 +6030,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeGetAttr',
-            body: [status_type, id], 
+            body: [status_type, id],
             signature: 'is',
         }, callback);
     };
@@ -6038,7 +6040,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeGetAttrs',
-            body: [status_type], 
+            body: [status_type],
             signature: 'i',
         }, callback);
     };
@@ -6048,7 +6050,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusTypeFindWithId',
-            body: [status_types, id], 
+            body: [status_types, id],
             signature: 'is',
         }, callback);
     };
@@ -6058,7 +6060,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusAttrNew',
-            body: [id, name, value_type], 
+            body: [id, name, value_type],
             signature: 'ssi',
         }, callback);
     };
@@ -6068,9 +6070,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusAttrDestroy',
-            body: [attr], 
+            body: [attr],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusAttrGetId = function(attr, callback) {
@@ -6079,7 +6081,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusAttrGetId',
-            body: [attr], 
+            body: [attr],
             signature: 'i',
         }, callback);
     };
@@ -6089,7 +6091,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusAttrGetName',
-            body: [attr], 
+            body: [attr],
             signature: 'i',
         }, callback);
     };
@@ -6099,7 +6101,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusAttrGetValue',
-            body: [attr], 
+            body: [attr],
             signature: 'i',
         }, callback);
     };
@@ -6109,7 +6111,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusNew',
-            body: [status_type, presence], 
+            body: [status_type, presence],
             signature: 'ii',
         }, callback);
     };
@@ -6119,9 +6121,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusDestroy',
-            body: [status], 
+            body: [status],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusSetActive = function(status, active, callback) {
@@ -6130,9 +6132,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusSetActive',
-            body: [status, active], 
+            body: [status, active],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusSetActiveWithAttrsList = function(status, active, attrs, callback) {
@@ -6141,9 +6143,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusSetActiveWithAttrsList',
-            body: [status, active, attrs], 
+            body: [status, active, attrs],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusSetAttrBoolean = function(status, id, value, callback) {
@@ -6152,9 +6154,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusSetAttrBoolean',
-            body: [status, id, value], 
+            body: [status, id, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusSetAttrInt = function(status, id, value, callback) {
@@ -6163,9 +6165,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusSetAttrInt',
-            body: [status, id, value], 
+            body: [status, id, value],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusSetAttrString = function(status, id, value, callback) {
@@ -6174,9 +6176,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusSetAttrString',
-            body: [status, id, value], 
+            body: [status, id, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusGetType = function(status, callback) {
@@ -6185,7 +6187,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetType',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6195,7 +6197,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetPresence',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6205,7 +6207,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetId',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6215,7 +6217,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetName',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6225,7 +6227,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusIsIndependent',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6235,7 +6237,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusIsExclusive',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6245,7 +6247,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusIsAvailable',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6255,7 +6257,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusIsActive',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6265,7 +6267,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusIsOnline',
-            body: [status], 
+            body: [status],
             signature: 'i',
         }, callback);
     };
@@ -6275,7 +6277,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetAttrValue',
-            body: [status, id], 
+            body: [status, id],
             signature: 'is',
         }, callback);
     };
@@ -6285,7 +6287,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetAttrBoolean',
-            body: [status, id], 
+            body: [status, id],
             signature: 'is',
         }, callback);
     };
@@ -6295,7 +6297,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetAttrInt',
-            body: [status, id], 
+            body: [status, id],
             signature: 'is',
         }, callback);
     };
@@ -6305,7 +6307,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusGetAttrString',
-            body: [status, id], 
+            body: [status, id],
             signature: 'is',
         }, callback);
     };
@@ -6315,7 +6317,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusCompare',
-            body: [status1, status2], 
+            body: [status1, status2],
             signature: 'ii',
         }, callback);
     };
@@ -6325,7 +6327,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceNew',
-            body: [context], 
+            body: [context],
             signature: 'i',
         }, callback);
     };
@@ -6335,7 +6337,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceNewForAccount',
-            body: [account], 
+            body: [account],
             signature: 'i',
         }, callback);
     };
@@ -6345,7 +6347,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceNewForConv',
-            body: [conv], 
+            body: [conv],
             signature: 'i',
         }, callback);
     };
@@ -6355,7 +6357,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceNewForBuddy',
-            body: [buddy], 
+            body: [buddy],
             signature: 'i',
         }, callback);
     };
@@ -6365,9 +6367,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceDestroy',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurplePresenceAddStatus = function(presence, status, callback) {
@@ -6376,9 +6378,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceAddStatus',
-            body: [presence, status], 
+            body: [presence, status],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurplePresenceSetStatusActive = function(presence, status_id, active, callback) {
@@ -6387,9 +6389,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceSetStatusActive',
-            body: [presence, status_id, active], 
+            body: [presence, status_id, active],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurplePresenceSwitchStatus = function(presence, status_id, callback) {
@@ -6398,9 +6400,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceSwitchStatus',
-            body: [presence, status_id], 
+            body: [presence, status_id],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurplePresenceSetIdle = function(presence, idle, idle_time, callback) {
@@ -6409,9 +6411,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceSetIdle',
-            body: [presence, idle, idle_time], 
+            body: [presence, idle, idle_time],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurplePresenceSetLoginTime = function(presence, login_time, callback) {
@@ -6420,9 +6422,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceSetLoginTime',
-            body: [presence, login_time], 
+            body: [presence, login_time],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurplePresenceGetContext = function(presence, callback) {
@@ -6431,7 +6433,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetContext',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6441,7 +6443,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetAccount',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6451,7 +6453,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetConversation',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6461,7 +6463,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetChatUser',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6471,7 +6473,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetBuddy',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6481,7 +6483,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetStatuses',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6491,7 +6493,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetStatus',
-            body: [presence, status_id], 
+            body: [presence, status_id],
             signature: 'is',
         }, callback);
     };
@@ -6501,7 +6503,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetActiveStatus',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6511,7 +6513,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceIsAvailable',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6521,7 +6523,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceIsOnline',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6531,7 +6533,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceIsStatusActive',
-            body: [presence, status_id], 
+            body: [presence, status_id],
             signature: 'is',
         }, callback);
     };
@@ -6541,7 +6543,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceIsStatusPrimitiveActive',
-            body: [presence, primitive], 
+            body: [presence, primitive],
             signature: 'ii',
         }, callback);
     };
@@ -6551,7 +6553,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceIsIdle',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6561,7 +6563,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetIdleTime',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6571,7 +6573,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceGetLoginTime',
-            body: [presence], 
+            body: [presence],
             signature: 'i',
         }, callback);
     };
@@ -6581,7 +6583,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePresenceCompare',
-            body: [presence1, presence2], 
+            body: [presence1, presence2],
             signature: 'ii',
         }, callback);
     };
@@ -6591,7 +6593,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleStatusUninit = function(callback) {
@@ -6600,7 +6602,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStatusUninit',
-            // 
+            //
         }, callback);
     };
     this.ServSendTyping = function(gc, name, state, callback) {
@@ -6609,7 +6611,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServSendTyping',
-            body: [gc, name, state], 
+            body: [gc, name, state],
             signature: 'isi',
         }, callback);
     };
@@ -6619,9 +6621,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServMoveBuddy',
-            body: [param0, param1, param2], 
+            body: [param0, param1, param2],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.ServSendIm = function(param0, param1, param2, flags, callback) {
@@ -6630,7 +6632,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServSendIm',
-            body: [param0, param1, param2, flags], 
+            body: [param0, param1, param2, flags],
             signature: 'issi',
         }, callback);
     };
@@ -6640,7 +6642,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGetAttentionTypeFromCode',
-            body: [account, type_code], 
+            body: [account, type_code],
             signature: 'ii',
         }, callback);
     };
@@ -6650,9 +6652,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServSendAttention',
-            body: [gc, who, type_code], 
+            body: [gc, who, type_code],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.ServGotAttention = function(gc, who, type_code, callback) {
@@ -6661,9 +6663,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotAttention',
-            body: [gc, who, type_code], 
+            body: [gc, who, type_code],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.ServGetInfo = function(param0, param1, callback) {
@@ -6672,9 +6674,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGetInfo',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServSetInfo = function(param0, param1, callback) {
@@ -6683,9 +6685,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServSetInfo',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServAddPermit = function(param0, param1, callback) {
@@ -6694,9 +6696,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServAddPermit',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServAddDeny = function(param0, param1, callback) {
@@ -6705,9 +6707,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServAddDeny',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServRemPermit = function(param0, param1, callback) {
@@ -6716,9 +6718,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServRemPermit',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServRemDeny = function(param0, param1, callback) {
@@ -6727,9 +6729,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServRemDeny',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServSetPermitDeny = function(param0, callback) {
@@ -6738,9 +6740,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServSetPermitDeny',
-            body: [param0], 
+            body: [param0],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.ServChatInvite = function(param0, param1, param2, param3, callback) {
@@ -6749,9 +6751,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServChatInvite',
-            body: [param0, param1, param2, param3], 
+            body: [param0, param1, param2, param3],
             signature: 'iiss',
-            // 
+            //
         }, callback);
     };
     this.ServChatLeave = function(param0, param1, callback) {
@@ -6760,9 +6762,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServChatLeave',
-            body: [param0, param1], 
+            body: [param0, param1],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.ServChatWhisper = function(param0, param1, param2, param3, callback) {
@@ -6771,9 +6773,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServChatWhisper',
-            body: [param0, param1, param2, param3], 
+            body: [param0, param1, param2, param3],
             signature: 'iiss',
-            // 
+            //
         }, callback);
     };
     this.ServChatSend = function(param0, param1, param2, flags, callback) {
@@ -6782,7 +6784,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServChatSend',
-            body: [param0, param1, param2, flags], 
+            body: [param0, param1, param2, flags],
             signature: 'iisi',
         }, callback);
     };
@@ -6792,9 +6794,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServAliasBuddy',
-            body: [param0], 
+            body: [param0],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.ServGotAlias = function(gc, who, alias, callback) {
@@ -6803,9 +6805,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotAlias',
-            body: [gc, who, alias], 
+            body: [gc, who, alias],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleServGotPrivateAlias = function(gc, who, alias, callback) {
@@ -6814,9 +6816,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleServGotPrivateAlias',
-            body: [gc, who, alias], 
+            body: [gc, who, alias],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.ServGotTyping = function(gc, name, timeout, state, callback) {
@@ -6825,9 +6827,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotTyping',
-            body: [gc, name, timeout, state], 
+            body: [gc, name, timeout, state],
             signature: 'isii',
-            // 
+            //
         }, callback);
     };
     this.ServGotTypingStopped = function(gc, name, callback) {
@@ -6836,9 +6838,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotTypingStopped',
-            body: [gc, name], 
+            body: [gc, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.ServGotIm = function(gc, who, msg, flags, mtime, callback) {
@@ -6847,9 +6849,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotIm',
-            body: [gc, who, msg, flags, mtime], 
+            body: [gc, who, msg, flags, mtime],
             signature: 'issii',
-            // 
+            //
         }, callback);
     };
     this.ServJoinChat = function(param0, data, callback) {
@@ -6858,9 +6860,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServJoinChat',
-            body: [param0, data], 
+            body: [param0, data],
             signature: 'ia{ss}',
-            // 
+            //
         }, callback);
     };
     this.ServRejectChat = function(param0, data, callback) {
@@ -6869,9 +6871,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServRejectChat',
-            body: [param0, data], 
+            body: [param0, data],
             signature: 'ia{ss}',
-            // 
+            //
         }, callback);
     };
     this.ServGotChatInvite = function(gc, name, who, message, data, callback) {
@@ -6880,9 +6882,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotChatInvite',
-            body: [gc, name, who, message, data], 
+            body: [gc, name, who, message, data],
             signature: 'isssa{ss}',
-            // 
+            //
         }, callback);
     };
     this.ServGotJoinedChat = function(gc, id, name, callback) {
@@ -6891,7 +6893,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotJoinedChat',
-            body: [gc, id, name], 
+            body: [gc, id, name],
             signature: 'iis',
         }, callback);
     };
@@ -6901,9 +6903,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleServGotJoinChatFailed',
-            body: [gc, data], 
+            body: [gc, data],
             signature: 'ia{ss}',
-            // 
+            //
         }, callback);
     };
     this.ServGotChatLeft = function(g, id, callback) {
@@ -6912,9 +6914,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotChatLeft',
-            body: [g, id], 
+            body: [g, id],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.ServGotChatIn = function(g, id, who, flags, message, mtime, callback) {
@@ -6923,9 +6925,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServGotChatIn',
-            body: [g, id, who, flags, message, mtime], 
+            body: [g, id, who, flags, message, mtime],
             signature: 'iisisi',
-            // 
+            //
         }, callback);
     };
     this.ServSendFile = function(gc, who, file, callback) {
@@ -6934,9 +6936,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'ServSendFile',
-            body: [gc, who, file], 
+            body: [gc, who, file],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurpleMenuActionFree = function(act, callback) {
@@ -6945,9 +6947,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMenuActionFree',
-            body: [act], 
+            body: [act],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleUtilSetCurrentSong = function(title, artist, album, callback) {
@@ -6956,9 +6958,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilSetCurrentSong',
-            body: [title, artist, album], 
+            body: [title, artist, album],
             signature: 'sss',
-            // 
+            //
         }, callback);
     };
     this.PurpleUtilInit = function(callback) {
@@ -6967,7 +6969,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilInit',
-            // 
+            //
         }, callback);
     };
     this.PurpleUtilUninit = function(callback) {
@@ -6976,7 +6978,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilUninit',
-            // 
+            //
         }, callback);
     };
     this.PurpleMimeDecodeField = function(str, callback) {
@@ -6985,7 +6987,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMimeDecodeField',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -6995,7 +6997,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleTimeBuild',
-            body: [year, month, day, hour, min, sec], 
+            body: [year, month, day, hour, min, sec],
             signature: 'iiiiii',
         }, callback);
     };
@@ -7005,7 +7007,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupEscapeText',
-            body: [text, length], 
+            body: [text, length],
             signature: 'si',
         }, callback);
     };
@@ -7015,7 +7017,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupStripHtml',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7025,7 +7027,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupLinkify',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7035,7 +7037,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUnescapeText',
-            body: [text], 
+            body: [text],
             signature: 's',
         }, callback);
     };
@@ -7045,7 +7047,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUnescapeHtml',
-            body: [html], 
+            body: [html],
             signature: 's',
         }, callback);
     };
@@ -7055,7 +7057,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupSlice',
-            body: [str, x, y], 
+            body: [str, x, y],
             signature: 'sii',
         }, callback);
     };
@@ -7065,7 +7067,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupGetTagName',
-            body: [tag], 
+            body: [tag],
             signature: 's',
         }, callback);
     };
@@ -7075,7 +7077,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupUnescapeEntity',
-            body: [text, length], 
+            body: [text, length],
             signature: 'si',
         }, callback);
     };
@@ -7085,7 +7087,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupGetCssProperty',
-            body: [style, opt], 
+            body: [style, opt],
             signature: 'ss',
         }, callback);
     };
@@ -7095,7 +7097,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleMarkupIsRtl',
-            body: [html], 
+            body: [html],
             signature: 's',
         }, callback);
     };
@@ -7121,9 +7123,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilSetUserDir',
-            body: [dir], 
+            body: [dir],
             signature: 's',
-            // 
+            //
         }, callback);
     };
     this.PurpleBuildDir = function(path, mode, callback) {
@@ -7132,7 +7134,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleBuildDir',
-            body: [path, mode], 
+            body: [path, mode],
             signature: 'si',
         }, callback);
     };
@@ -7142,7 +7144,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilWriteDataToFile',
-            body: [filename, data, size], 
+            body: [filename, data, size],
             signature: 'ssi',
         }, callback);
     };
@@ -7152,7 +7154,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilWriteDataToFileAbsolute',
-            body: [filename_full, data, size], 
+            body: [filename_full, data, size],
             signature: 'ssi',
         }, callback);
     };
@@ -7162,7 +7164,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleProgramIsValid',
-            body: [program], 
+            body: [program],
             signature: 's',
         }, callback);
     };
@@ -7196,7 +7198,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFdGetIp',
-            body: [fd], 
+            body: [fd],
             signature: 'i',
         }, callback);
     };
@@ -7206,7 +7208,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSocketGetFamily',
-            body: [fd], 
+            body: [fd],
             signature: 'i',
         }, callback);
     };
@@ -7216,7 +7218,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleSocketSpeaksIpv4',
-            body: [fd], 
+            body: [fd],
             signature: 'i',
         }, callback);
     };
@@ -7226,7 +7228,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrequal',
-            body: [left, right], 
+            body: [left, right],
             signature: 'ss',
         }, callback);
     };
@@ -7236,7 +7238,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNormalize',
-            body: [account, str], 
+            body: [account, str],
             signature: 'is',
         }, callback);
     };
@@ -7246,7 +7248,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleNormalizeNocase',
-            body: [account, str], 
+            body: [account, str],
             signature: 'is',
         }, callback);
     };
@@ -7256,7 +7258,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrHasPrefix',
-            body: [s, p], 
+            body: [s, p],
             signature: 'ss',
         }, callback);
     };
@@ -7266,7 +7268,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrHasSuffix',
-            body: [s, x], 
+            body: [s, x],
             signature: 'ss',
         }, callback);
     };
@@ -7276,7 +7278,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrdupWithhtml',
-            body: [src], 
+            body: [src],
             signature: 's',
         }, callback);
     };
@@ -7286,7 +7288,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrAddCr',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7296,7 +7298,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrreplace',
-            body: [string, delimiter, replacement], 
+            body: [string, delimiter, replacement],
             signature: 'sss',
         }, callback);
     };
@@ -7306,7 +7308,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8NcrEncode',
-            body: [_in], 
+            body: [_in],
             signature: 's',
         }, callback);
     };
@@ -7316,7 +7318,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8NcrDecode',
-            body: [_in], 
+            body: [_in],
             signature: 's',
         }, callback);
     };
@@ -7326,7 +7328,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrcasereplace',
-            body: [string, delimiter, replacement], 
+            body: [string, delimiter, replacement],
             signature: 'sss',
         }, callback);
     };
@@ -7336,7 +7338,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrcasestr',
-            body: [haystack, needle], 
+            body: [haystack, needle],
             signature: 'ss',
         }, callback);
     };
@@ -7346,7 +7348,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrSizeToUnits',
-            body: [size], 
+            body: [size],
             signature: 'i',
         }, callback);
     };
@@ -7356,7 +7358,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrSecondsToString',
-            body: [sec], 
+            body: [sec],
             signature: 'i',
         }, callback);
     };
@@ -7366,7 +7368,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleStrBinaryToAscii',
-            body: [binary, len], 
+            body: [binary, len],
             signature: 'si',
         }, callback);
     };
@@ -7376,9 +7378,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleGotProtocolHandlerUri',
-            body: [uri], 
+            body: [uri],
             signature: 's',
-            // 
+            //
         }, callback);
     };
     this.PurpleUtilFetchUrlCancel = function(url_data, callback) {
@@ -7387,9 +7389,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtilFetchUrlCancel',
-            body: [url_data], 
+            body: [url_data],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleUrlDecode = function(str, callback) {
@@ -7398,7 +7400,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUrlDecode',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7408,7 +7410,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUrlEncode',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7418,7 +7420,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleEmailIsValid',
-            body: [address], 
+            body: [address],
             signature: 's',
         }, callback);
     };
@@ -7428,7 +7430,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleIpAddressIsValid',
-            body: [ip], 
+            body: [ip],
             signature: 's',
         }, callback);
     };
@@ -7438,7 +7440,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleIpv4AddressIsValid',
-            body: [ip], 
+            body: [ip],
             signature: 's',
         }, callback);
     };
@@ -7448,7 +7450,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleIpv6AddressIsValid',
-            body: [ip], 
+            body: [ip],
             signature: 's',
         }, callback);
     };
@@ -7458,7 +7460,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUriListExtractUris',
-            body: [uri_list], 
+            body: [uri_list],
             signature: 's',
         }, callback);
     };
@@ -7468,7 +7470,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUriListExtractFilenames',
-            body: [uri_list], 
+            body: [uri_list],
             signature: 's',
         }, callback);
     };
@@ -7478,7 +7480,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8TryConvert',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7488,7 +7490,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8Salvage',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7498,7 +7500,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8StripUnprintables',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7508,7 +7510,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8Strcasecmp',
-            body: [a, b], 
+            body: [a, b],
             signature: 'ss',
         }, callback);
     };
@@ -7518,7 +7520,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUtf8HasWord',
-            body: [haystack, needle], 
+            body: [haystack, needle],
             signature: 'ss',
         }, callback);
     };
@@ -7528,7 +7530,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleTextStripMnemonic',
-            body: [_in], 
+            body: [_in],
             signature: 's',
         }, callback);
     };
@@ -7538,7 +7540,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleUnescapeFilename',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7548,7 +7550,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleEscapeFilename',
-            body: [str], 
+            body: [str],
             signature: 's',
         }, callback);
     };
@@ -7558,7 +7560,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleOscarConvert',
-            body: [act, protocol], 
+            body: [act, protocol],
             signature: 'ss',
         }, callback);
     };
@@ -7568,7 +7570,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleRestoreDefaultSignalHandlers',
-            // 
+            //
         }, callback);
     };
     this.PurpleGetHostName = function(callback) {
@@ -7593,9 +7595,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeInsertChild',
-            body: [parent, child], 
+            body: [parent, child],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeInsertData = function(node, data, size, callback) {
@@ -7604,9 +7606,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeInsertData',
-            body: [node, data, size], 
+            body: [node, data, size],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeGetData = function(node, callback) {
@@ -7615,7 +7617,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeGetData',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -7625,7 +7627,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeGetDataUnescaped',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -7635,9 +7637,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeSetAttrib',
-            body: [node, attr, value], 
+            body: [node, attr, value],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeSetAttribWithPrefix = function(node, attr, prefix, value, callback) {
@@ -7646,9 +7648,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeSetAttribWithPrefix',
-            body: [node, attr, prefix, value], 
+            body: [node, attr, prefix, value],
             signature: 'isss',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeSetAttribWithNamespace = function(node, attr, xmlns, value, callback) {
@@ -7657,9 +7659,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeSetAttribWithNamespace',
-            body: [node, attr, xmlns, value], 
+            body: [node, attr, xmlns, value],
             signature: 'isss',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeSetAttribFull = function(node, attr, xmlns, prefix, value, callback) {
@@ -7668,9 +7670,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeSetAttribFull',
-            body: [node, attr, xmlns, prefix, value], 
+            body: [node, attr, xmlns, prefix, value],
             signature: 'issss',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeGetAttrib = function(node, attr, callback) {
@@ -7679,7 +7681,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeGetAttrib',
-            body: [node, attr], 
+            body: [node, attr],
             signature: 'is',
         }, callback);
     };
@@ -7689,7 +7691,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeGetAttribWithNamespace',
-            body: [node, attr, xmlns], 
+            body: [node, attr, xmlns],
             signature: 'iss',
         }, callback);
     };
@@ -7699,9 +7701,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeRemoveAttrib',
-            body: [node, attr], 
+            body: [node, attr],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeRemoveAttribWithNamespace = function(node, attr, xmlns, callback) {
@@ -7710,9 +7712,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeRemoveAttribWithNamespace',
-            body: [node, attr, xmlns], 
+            body: [node, attr, xmlns],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeSetNamespace = function(node, xmlns, callback) {
@@ -7721,9 +7723,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeSetNamespace',
-            body: [node, xmlns], 
+            body: [node, xmlns],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeGetNamespace = function(node, callback) {
@@ -7732,7 +7734,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeGetNamespace',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -7742,9 +7744,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeSetPrefix',
-            body: [node, prefix], 
+            body: [node, prefix],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.XmlnodeGetPrefix = function(node, callback) {
@@ -7753,7 +7755,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeGetPrefix',
-            body: [node], 
+            body: [node],
             signature: 'i',
         }, callback);
     };
@@ -7763,7 +7765,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeToStr',
-            body: [node, len], 
+            body: [node, len],
             signature: 'ii',
         }, callback);
     };
@@ -7773,7 +7775,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeToFormattedStr',
-            body: [node, len], 
+            body: [node, len],
             signature: 'ii',
         }, callback);
     };
@@ -7783,9 +7785,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'XmlnodeFree',
-            body: [node], 
+            body: [node],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurpleAttentionTypeNew = function(ulname, name, inc_desc, out_desc, callback) {
@@ -7794,7 +7796,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeNew',
-            body: [ulname, name, inc_desc, out_desc], 
+            body: [ulname, name, inc_desc, out_desc],
             signature: 'ssss',
         }, callback);
     };
@@ -7804,9 +7806,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeSetName',
-            body: [type, name], 
+            body: [type, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAttentionTypeSetIncomingDesc = function(type, desc, callback) {
@@ -7815,9 +7817,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeSetIncomingDesc',
-            body: [type, desc], 
+            body: [type, desc],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAttentionTypeSetOutgoingDesc = function(type, desc, callback) {
@@ -7826,9 +7828,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeSetOutgoingDesc',
-            body: [type, desc], 
+            body: [type, desc],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAttentionTypeSetIconName = function(type, name, callback) {
@@ -7837,9 +7839,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeSetIconName',
-            body: [type, name], 
+            body: [type, name],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAttentionTypeSetUnlocalizedName = function(type, ulname, callback) {
@@ -7848,9 +7850,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeSetUnlocalizedName',
-            body: [type, ulname], 
+            body: [type, ulname],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleAttentionTypeGetName = function(type, callback) {
@@ -7859,7 +7861,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeGetName',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -7869,7 +7871,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeGetIncomingDesc',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -7879,7 +7881,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeGetOutgoingDesc',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -7889,7 +7891,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeGetIconName',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -7899,7 +7901,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleAttentionTypeGetUnlocalizedName',
-            body: [type], 
+            body: [type],
             signature: 'i',
         }, callback);
     };
@@ -7909,9 +7911,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotAccountIdle',
-            body: [account, idle, idle_time], 
+            body: [account, idle, idle_time],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotAccountLoginTime = function(account, login_time, callback) {
@@ -7920,9 +7922,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotAccountLoginTime',
-            body: [account, login_time], 
+            body: [account, login_time],
             signature: 'ii',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotAccountActions = function(account, callback) {
@@ -7931,9 +7933,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotAccountActions',
-            body: [account], 
+            body: [account],
             signature: 'i',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotUserIdle = function(account, name, idle, idle_time, callback) {
@@ -7942,9 +7944,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotUserIdle',
-            body: [account, name, idle, idle_time], 
+            body: [account, name, idle, idle_time],
             signature: 'isii',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotUserLoginTime = function(account, name, login_time, callback) {
@@ -7953,9 +7955,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotUserLoginTime',
-            body: [account, name, login_time], 
+            body: [account, name, login_time],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotUserStatusDeactive = function(account, name, status_id, callback) {
@@ -7964,9 +7966,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotUserStatusDeactive',
-            body: [account, name, status_id], 
+            body: [account, name, status_id],
             signature: 'iss',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplChangeAccountStatus = function(account, old_status, new_status, callback) {
@@ -7975,9 +7977,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplChangeAccountStatus',
-            body: [account, old_status, new_status], 
+            body: [account, old_status, new_status],
             signature: 'iii',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGetStatuses = function(account, presence, callback) {
@@ -7986,7 +7988,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGetStatuses',
-            body: [account, presence], 
+            body: [account, presence],
             signature: 'ii',
         }, callback);
     };
@@ -7996,9 +7998,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplSendAttention',
-            body: [gc, who, type_code], 
+            body: [gc, who, type_code],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotAttention = function(gc, who, type_code, callback) {
@@ -8007,9 +8009,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotAttention',
-            body: [gc, who, type_code], 
+            body: [gc, who, type_code],
             signature: 'isi',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGotAttentionInChat = function(gc, id, who, type_code, callback) {
@@ -8018,9 +8020,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotAttentionInChat',
-            body: [gc, id, who, type_code], 
+            body: [gc, id, who, type_code],
             signature: 'iisi',
-            // 
+            //
         }, callback);
     };
     this.PurplePrplGetMediaCaps = function(account, who, callback) {
@@ -8029,7 +8031,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGetMediaCaps',
-            body: [account, who], 
+            body: [account, who],
             signature: 'is',
         }, callback);
     };
@@ -8039,7 +8041,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplInitiateMedia',
-            body: [account, who, type], 
+            body: [account, who, type],
             signature: 'isi',
         }, callback);
     };
@@ -8049,9 +8051,9 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurplePrplGotMediaCaps',
-            body: [account, who], 
+            body: [account, who],
             signature: 'is',
-            // 
+            //
         }, callback);
     };
     this.PurpleFindPrpl = function(id, callback) {
@@ -8060,7 +8062,7 @@ module.exports['im.pidgin.purple.PurpleInterface'] = function(bus, path) {
             path: path,
             interface: 'im.pidgin.purple.PurpleInterface',
             member: 'PurpleFindPrpl',
-            body: [id], 
+            body: [id],
             signature: 's',
         }, callback);
     };
