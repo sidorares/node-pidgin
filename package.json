@@ -1,0 +1,25 @@
+{
+  "name": "pidgin",
+  "version": "0.0.1",
+  "description": "Pidgin client using pidgin dbus api and dbus-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sidorares/node-pidgin.git"
+  },
+  "keywords": [
+    "pidgin",
+    "im",
+    "dbus",
+    "d-bus"
+  ],
+  "author": "Andrey Sidorov <sidorares@yandex.ru>",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "dbus-native": "0.0.9"
+  }
+}
