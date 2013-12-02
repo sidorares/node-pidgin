@@ -21,6 +21,7 @@ pidgin.PurpleSavedstatusNew('Вася Ложкин', 2, function (err, status) {
 Handle message:
 ```js
 var pidgin = require('pidgin').createClient();
-pidgin.on('ReceivedImMsg', function(msg) {
-  console.log('Message!', msg)
-})
+pidgin.on('ReceivedImMsg', function(account, sender, message, conversation, flags) {
+   console.log('Message!', message)
+});
+```
