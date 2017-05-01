@@ -1,6 +1,8 @@
 node-pidgin
 ===========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sidorares/node-pidgin.svg)](https://greenkeeper.io/)
+
 Pidgin node.js client using pidgin dbus api
 
 ## API
