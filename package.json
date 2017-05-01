@@ -20,6 +20,6 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "dbus-native": "0.0.13"
+    "dbus-native": "0.2.0"
   }
 }
